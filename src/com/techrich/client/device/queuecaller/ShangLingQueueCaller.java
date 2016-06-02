@@ -83,9 +83,9 @@ public class ShangLingQueueCaller extends QueueCallerScreen {
 	@Override
 	public void service(int counterNum, String num) {
 		try{
-			String cName = Tools.adjustString(String.valueOf(counterNum), '0', 2, true);
+			//String cName = Tools.adjustString(String.valueOf(counterNum), '0', 2, true);
 			
-			displayCounterScreen(counterNum, cName+"服务"+num);
+			displayCounterScreen(counterNum, /*cName+*/"服务"+num);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
