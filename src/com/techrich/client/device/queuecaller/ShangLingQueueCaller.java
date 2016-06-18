@@ -2,10 +2,10 @@ package com.techrich.client.device.queuecaller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.LogManager;
 
 import com.techrich.client.device.DeviceInitException;
 import com.techrich.client.device.QueueCallerScreen;
+import com.techrich.client.manager.ConfigManager;
 import com.techrich.tools.ByteBuffer;
 import com.techrich.tools.Tools;
 
@@ -21,6 +21,7 @@ public class ShangLingQueueCaller extends QueueCallerScreen {
 	
 	private List<String> displayer = new ArrayList<String>();
 	
+	int maxMainScreenDisplayLines = DEFAULT_DISPLAY_LINE;
 	public ShangLingQueueCaller(){
 		this.deviceId = "CALLER-DISPLAY-SL";
 	}
@@ -31,6 +32,9 @@ public class ShangLingQueueCaller extends QueueCallerScreen {
 	
 	@Override
 	public void initDevice() throws DeviceInitException {
+		
+		maxMainScreenDisplayLines = Integer.parseInt(ConfigManager.getDefault().getConfigElementDef("queue.maindisplay.lines", String.valueOf(DEFAULT_DISPLAY_LINE)));
+
 		try{
 			displayCounterScreen(0, "欢迎光临！");
 		}catch(Exception e){
@@ -122,7 +126,7 @@ public class ShangLingQueueCaller extends QueueCallerScreen {
 		if(info != null && !info.trim().equals("")){
 			if(!displayer.contains(info)){
 				displayer.add(info);
-				while(displayer.size() > DEFAULT_DISPLAY_LINE) displayer.remove(0);
+				while(displayer.size() > maxMainScreenDisplayLines) displayer.remove(0);
 			}else{
 				System.out.println( "主显示屏已经包含:[" + info+"]不再显示同样的信息！ ");
 				return;
@@ -130,7 +134,7 @@ public class ShangLingQueueCaller extends QueueCallerScreen {
 		}
 		
 		StringBuilder sb = new StringBuilder();
-		for(int i = 0; i < DEFAULT_DISPLAY_LINE; i++){
+		for(int i = 0; i < maxMainScreenDisplayLines; i++){
 			String line = displayer.size() > i ? displayer.get(i) : "";
 			sb.append(line);
 		}
