@@ -115,7 +115,12 @@ public class JSTDSecureKeypad extends SecureKeypad {
 	try{Thread.sleep(1000);}catch(Exception e){}
 		System.out.println("ATR:"+Tools.bytes2hex(comm2keypad(new byte[]{0x49})));//ио╣Г
 		
-		apdu(Tools.hex2bytes("00A40200020011"));
+		try{
+			apdu(Tools.hex2bytes("00A40200020011"));
+		}catch(Exception e){
+			apdu(Tools.hex2bytes("00A40000020011"));
+		}
+		
 		byte[] datas= apdu(Tools.hex2bytes("00B000002E"));
 		return new String(datas).substring(datas.length-15-8);//		"00000000000000000000000" + posShop + posTerminal;
 	}
