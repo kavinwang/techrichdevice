@@ -163,7 +163,7 @@ public class GenericSecureKeypad extends SecureKeypad {
 			ByteBuffer macApdu = new ByteBuffer();
 			macApdu.append(Tools.hex2bytes("80FA0000")).append((byte)macKey.length).append(macKey);
 			macKeyResult = apdu(macApdu.getValue());
-			
+			LogManager.logInfo("PINKEYΩ‚√‹«∞[:"+Tools.bytes2hex(macKey)+"]∫Û["+Tools.bytes2hex(macKeyResult)+"]");
 		}
 		
 		
