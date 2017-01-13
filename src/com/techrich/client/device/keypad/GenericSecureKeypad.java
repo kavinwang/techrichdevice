@@ -69,7 +69,7 @@ public class GenericSecureKeypad extends SecureKeypad {
 			throw new DeviceInitException(e);
 		}
 		try{
-			comm2keypad(new byte[]{0x46, 0x02, (byte)0x46});//键盘输入 PIN 短时，用<F>值填充 PIN 右边直至 8 字节
+			comm2keypad(new byte[]{0x46, 0x02, 'F'});//键盘输入 PIN 短时，用<F>值填充 PIN 右边直至 8 字节
 			comm2keypad(new byte[]{0x46, 0x04, 0x10});//键盘输入 PIN 处理方式为ISO9564-1格式0(ANSI 格式) 
 			comm2keypad(new byte[]{0x46, 0x05, 0x01});//在 PIN 输入时，达到指定长度时自动加送回车键值
 			comm2keypad(new byte[]{0x46, 0x05, 0x04});//下载密钥不返回验证码*
