@@ -71,7 +71,7 @@ public class KMYSecureKeypad extends SecureKeypad {
 		}
 		try{
 //			comm2keypad(new byte[]{0x46, 0x00, 0x40});//下载工作密钥采用SAM卡内算法,主密钥解密
-			comm2keypad(new byte[]{0x46, 0x02, 'F'});//键盘输入 PIN 短时，用<F>值填充 PIN 右边直至 8 字节
+			comm2keypad(new byte[]{0x46, 0x02, (byte)0xFF});//键盘输入 PIN 短时，用<F>值填充 PIN 右边直至 8 字节
 //			comm2keypad(new byte[]{0x46, 0x01, 0x70});//
 			comm2keypad(new byte[]{0x46, 0x04, 0x10});//键盘输入 PIN 处理方式为ISO9564-1格式0(ANSI 格式) 
 			comm2keypad(new byte[]{0x46, 0x05, 0x01});//在 PIN 输入时，达到指定长度时自动加送回车键值
